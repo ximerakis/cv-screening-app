@@ -15,7 +15,7 @@ jd_file = st.file_uploader("📌 Upload Job Description (PDF or TXT)", type=["pd
 cv_files = st.file_uploader("📎 Upload Candidate CVs (PDF)", type="pdf", accept_multiple_files=True)
 excel_file = st.file_uploader("📋 Upload Excel file with candidate emails", type=["xlsx"])
 
-if st.button("▶️ Run Screening") and jd_file and cv_files and excel_file and openai.api_key:
+if st.button("▶️ Run Screening") and jd_file and cv_files and excel_file and api_key:
     st.info("Processing...")
 
     # Read job description
