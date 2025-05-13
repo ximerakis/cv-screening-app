@@ -28,10 +28,6 @@ gmail_address = st.text_input("Your Gmail address (sender)", type="default")
 gmail_password = st.text_input("Gmail App Password", type="password")
 
 
-st.subheader("📤 Email Configuration")
-gmail_address = st.text_input("Your Gmail address (sender)", type="default")
-gmail_password = st.text_input("Gmail App Password", type="password")
-
 jd_file = st.file_uploader("📌 Upload Job Description (PDF or TXT)", type=["pdf", "txt"])
 cv_files = st.file_uploader("📎 Upload Candidate CVs (PDF)", type="pdf", accept_multiple_files=True)
 excel_file = st.file_uploader("📋 Upload Excel file with candidate emails", type=["xlsx"])
