@@ -5,6 +5,20 @@ from openai import OpenAI
 import tempfile
 import re
 
+import smtplib
+from email.mime.text import MIMEText
+
+def send_email(to_email, subject, body, from_email, app_password):
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = from_email
+    msg['To'] = to_email
+
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+        server.login(from_email, app_password)
+        server.send_message(msg)
+
+
 st.title("📄 CV Screening Assistant")
 
 api_key = st.text_input("🔐 Enter your OpenAI API Key", type="password")
