@@ -26,7 +26,7 @@ client = OpenAI(api_key=api_key)
 st.subheader("📤 Email Configuration")
 gmail_address = st.text_input("Your Gmail address (sender)", type="default")
 gmail_password = st.text_input("Gmail App Password", type="password")
-send_emails = st.checkbox("✅ Send emails to candidates", value=False)
+send_emails = st.checkbox(" Send emails to candidates", value=False)
 
 
 
