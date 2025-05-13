@@ -90,11 +90,11 @@ Explanation: ...
         score = int(match.group(1)) if match else None
         explanation = result_text.split("Explanation:")[-1].strip() if "Explanation:" in result_text else "N/A"
         email = email_lookup.get(filename, "Not found")
-        status = "Passed" if score and score >= 85 else "Not Passed"
+        status = "Passed" if score and score >= 70 else "Not Passed"
 
         # Send result email if address is found
         if email != "Not found" and gmail_address and gmail_password:
-            if score is not None and score >= 85:
+            if score is not None and score >= 70:
                 subject = "🎉 Next Step in Your Application"
                 body = (
                     f"Dear Candidate,\n\n"
