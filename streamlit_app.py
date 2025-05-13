@@ -26,6 +26,8 @@ client = OpenAI(api_key=api_key)
 st.subheader("📤 Email Configuration")
 gmail_address = st.text_input("Your Gmail address (sender)", type="default")
 gmail_password = st.text_input("Gmail App Password", type="password")
+send_emails = st.checkbox("✅ Send emails to candidates", value=False)
+
 
 
 jd_file = st.file_uploader("📌 Upload Job Description (PDF or TXT)", type=["pdf", "txt"])
@@ -93,13 +95,12 @@ Explanation: ...
         status = "Passed" if score and score >= 70 else "Not Passed"
 
         # Send result email if address is found
-        if email != "Not found" and gmail_address and gmail_password:
+        if send_emails and email != "Not found" and gmail_address and gmail_password:
             if score is not None and score >= 70:
                 subject = "🎉 Next Step in Your Application"
                 body = (
                     f"Dear Candidate,\n\n"
                     f"Congratulations! Based on your CV, you've passed to the next step in our recruitment process.\n\n"
-                    f"Match Score: {score}%\n\n"
                     f"Best regards,\nHR Team"
                 )
             else:
@@ -107,7 +108,6 @@ Explanation: ...
                 body = (
                     f"Dear Candidate,\n\n"
                     f"Thank you for applying. Unfortunately, your profile did not meet the criteria for this position.\n\n"
-                    f"Match Score: {score if score else 'N/A'}%\n\n"
                     f"Kind regards,\nHR Team"
                 )
         
