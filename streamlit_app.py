@@ -92,6 +92,32 @@ Explanation: ...
         email = email_lookup.get(filename, "Not found")
         status = "Passed" if score and score >= 85 else "Not Passed"
 
+        # Send result email if address is found
+if email != "Not found" and gmail_address and gmail_password:
+    if score is not None and score >= 85:
+        subject = "🎉 Next Step in Your Application"
+        body = (
+            f"Dear Candidate,\n\n"
+            f"Congratulations! Based on your CV, you've passed to the next step in our recruitment process.\n\n"
+            f"Match Score: {score}%\n\n"
+            f"Best regards,\nHR Team"
+        )
+    else:
+        subject = "Thank You for Applying"
+        body = (
+            f"Dear Candidate,\n\n"
+            f"Thank you for applying. Unfortunately, your profile did not meet the criteria for this position.\n\n"
+            f"Match Score: {score if score else 'N/A'}%\n\n"
+            f"Kind regards,\nHR Team"
+        )
+
+    try:
+        send_email(email, subject, body, gmail_address, gmail_password)
+        st.info(f"📧 Email sent to {email}")
+    except Exception as e:
+        st.error(f"❌ Failed to send email to {email}: {e}")
+
+
         results.append({
             "Filename": filename,
             "Email": email,
