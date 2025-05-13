@@ -1,13 +1,15 @@
 import streamlit as st
 import fitz  # PyMuPDF
 import pandas as pd
-import openai
+from openai import OpenAI
 import tempfile
 import re
 
 st.title("📄 CV Screening Assistant")
 
-openai.api_key = st.text_input("🔐 Enter your OpenAI API Key", type="password")
+api_key = st.text_input("🔐 Enter your OpenAI API Key", type="password")
+client = OpenAI(api_key=api_key)
+
 
 jd_file = st.file_uploader("📌 Upload Job Description (PDF or TXT)", type=["pdf", "txt"])
 cv_files = st.file_uploader("📎 Upload Candidate CVs (PDF)", type="pdf", accept_multiple_files=True)
@@ -53,7 +55,7 @@ Match Percentage: XX%
 Explanation: ...
 """
 
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful HR assistant."},
