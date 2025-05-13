@@ -35,10 +35,13 @@ if st.button("▶️ Run Screening") and jd_file and cv_files and excel_file and
         filename = cv_file.name
 
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
-            tmp.write(cv_file.read())
+            cv_bytes = cv_file.read()
+            tmp.write(cv_bytes)
+            tmp.flush()  # ensure data is written
             doc = fitz.open(tmp.name)
             cv_text = "\n".join(page.get_text() for page in doc)
             doc.close()
+
 
         prompt = f"""
 Compare this CV to the job description below.
